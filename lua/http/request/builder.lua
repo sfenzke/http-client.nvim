@@ -2,37 +2,16 @@ local HttpRequestBuilder = {}
 
 local cloneable = require("utils.cloneable")
 local HttpMethods = require("http.http_methods")
+local HttpRequest = require("http.request.request")
 
-local function build_request_line(method, uri)
-	return string.format("%s %s HTTP/1.1", method, uri)
-end
-
-local function build_headers(headers)
-	local t = {}
-	for key, value in pairs(headers) do
-		if value then
-			t[#t + 1] = string.format("%s: %s", key, value)
-		else
-			t[#t + 1] = key
-		end
-	end
-
-	return table.concat(t, "\n")
-end
-
-function HttpRequestBuilder:new(o)
-	o = {}
+function HttpRequestBuilder:new()
+	local o = {}
 
 	setmetatable(HttpRequestBuilder, { __index = cloneable })
 	HttpRequestBuilder.__index = HttpRequestBuilder
 	setmetatable(o, HttpRequestBuilder)
 
-	self._method = ""
-
-	self._uri = ""
-	self._host = ""
-	self._headers = {}
-	self._body = ""
+	o.http_request = HttpRequest:new()
 
 	return o
 end
@@ -40,7 +19,7 @@ end
 -- return self on success or nil on failure
 function HttpRequestBuilder:method(method)
 	if HttpMethods[method] then
-		self._method = HttpMethods[method]
+		self.http_request.method = HttpMethods[method]
 		return self
 	else
 		return nil
@@ -48,12 +27,12 @@ function HttpRequestBuilder:method(method)
 end
 
 function HttpRequestBuilder:uri(uri)
-	self._uri = uri
+	self.http_request.uri = uri
 	return self
 end
 
 function HttpRequestBuilder:host(host)
-	self._host = host
+	self.http_request.host = host
 	return self
 end
 
@@ -64,34 +43,24 @@ function HttpRequestBuilder:add_header(
 	value
 )
 	if key then
-		self._headers[key] = value
+		self.http_request.headers[key] = value
 	else
-		self._headers[key] = nil
+		self.http_request.headers[key] = nil
 	end
 
 	return self
 end
 
 function HttpRequestBuilder:body(body)
-	self._body = body
+	self.http_request.body = body
 end
 
 function HttpRequestBuilder:json_body(obj)
-	self._body = vim.json.encode(obj)
+	self.http_request.body = vim.json.encode(obj)
 end
 
 function HttpRequestBuilder:build()
-	return string.format(
-		[[%s
-Host:%s
-%s
-
-%s]],
-		build_request_line(self._method, self._uri),
-		self._host,
-		build_headers(self._headers),
-		self._body
-	)
+	return self.http_request
 end
 
 return HttpRequestBuilder
