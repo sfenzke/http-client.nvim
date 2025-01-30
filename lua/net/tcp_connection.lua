@@ -15,7 +15,9 @@ tcp_connection.send = function(ip, port, data, callback)
 			if read_error then
 				--TODO: Error handling
 			elseif chunk then
-				callback(chunk)
+				if callback then
+					callback(chunk)
+				end
 			else
 				tcp_handler:close()
 			end
