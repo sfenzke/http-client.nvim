@@ -36,17 +36,8 @@ function HttpRequestBuilder:host(host)
 	return self
 end
 
-function HttpRequestBuilder:add_header(
-	--[[required]]
-	key,
-	--[[optional]]
-	value
-)
-	if key then
-		self.http_request.headers[key] = value
-	else
-		self.http_request.headers[key] = nil
-	end
+function HttpRequestBuilder:add_header(key, value)
+	self.http_request.headers[key] = value
 
 	return self
 end
