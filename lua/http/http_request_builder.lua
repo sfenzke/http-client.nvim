@@ -11,6 +11,8 @@ HttpRequestBuilder._http_methods = {
 	CONNECT = "CONNECT",
 }
 
+local cloneable = require("utils.cloneable")
+
 local function build_request_line(method, uri)
 	return string.format("%s %s HTTP/1.1", method, uri)
 end
@@ -29,10 +31,14 @@ local function build_headers(headers)
 end
 
 function HttpRequestBuilder:new(o)
-	o = o or {}
-	setmetatable(o, self)
-	self.__index = self
+	o = {}
+
+	setmetatable(HttpRequestBuilder, { __index = cloneable })
+	HttpRequestBuilder.__index = HttpRequestBuilder
+	setmetatable(o, HttpRequestBuilder)
+
 	self._method = ""
+
 	self._uri = ""
 	self._host = ""
 	self._headers = {}
