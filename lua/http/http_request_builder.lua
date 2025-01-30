@@ -1,17 +1,7 @@
 HttpRequestBuilder = {}
 
-HttpRequestBuilder._http_methods = {
-	OPTIONS = "OPTIONS",
-	GET = "GET",
-	HEAD = "HEAD",
-	POST = "POST",
-	PUT = "PUT",
-	DELETE = "DELETE",
-	TRACE = "TRACE",
-	CONNECT = "CONNECT",
-}
-
 local cloneable = require("utils.cloneable")
+local http_methods = require("http.http_methods")
 
 local function build_request_line(method, uri)
 	return string.format("%s %s HTTP/1.1", method, uri)
@@ -49,8 +39,8 @@ end
 
 -- return self on success or nil on failure
 function HttpRequestBuilder:method(method)
-	if self._http_methods[method] then
-		self._method = self._http_methods[method]
+	if http_methods[method] then
+		self._method = http_methods[method]
 		return self
 	else
 		return nil
