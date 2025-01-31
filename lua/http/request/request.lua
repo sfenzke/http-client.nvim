@@ -41,16 +41,12 @@ local function build_headers(headers)
 		end
 	end
 
-	return table.concat(t, "\n")
+	return table.concat(t, "\r\n")
 end
 
 function HttpRequest:to_string()
 	return string.format(
-		[[%s
-Host:%s
-%s
-
-%s]],
+		"%s\r\nHost: %s\r\n%s\r\n\r\n%s",
 		build_request_line(self.method, self.uri),
 		self.host,
 		build_headers(self.headers),
