@@ -48,8 +48,11 @@ function HttpRequestBuilder:body(body)
 	return self
 end
 
+--- Takes an object, json encodes it and sets it as the body of the request.
+--- Also adds the HTTP headder "Content-Type": "application/json"
 function HttpRequestBuilder:json_body(obj)
 	self.http_request.body = vim.json.encode(obj)
+	self:add_header("Content-Type", "application/json")
 
 	return self
 end
