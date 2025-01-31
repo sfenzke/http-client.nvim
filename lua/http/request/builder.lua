@@ -44,10 +44,14 @@ end
 
 function HttpRequestBuilder:body(body)
 	self.http_request.body = body
+
+	return self
 end
 
 function HttpRequestBuilder:json_body(obj)
 	self.http_request.body = vim.json.encode(obj)
+
+	return self
 end
 
 function HttpRequestBuilder:build()
