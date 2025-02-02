@@ -36,6 +36,11 @@ function HttpRequestBuilder:host(host)
 	return self
 end
 
+function HttpRequestBuilder:port(port)
+	self.http_request.port = port
+	return self
+end
+
 function HttpRequestBuilder:add_header(key, value)
 	self.http_request.headers[key] = value
 

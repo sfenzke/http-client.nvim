@@ -21,6 +21,7 @@ function HttpRequest:new()
 	obj._method = ""
 	obj._uri = ""
 	obj.host = ""
+	obj.port = "80"
 	obj.headers = {}
 	obj.body = ""
 
@@ -54,24 +55,13 @@ function HttpRequest:to_string()
 	)
 end
 
---- Sends the request to the server defined in the host field.
--- Host must be in the form of an ip and optionally a port separated by :
--- if the optional port is not in the host the default port for http 80 will be used to send the data
--- @param callback optional callback which gets called when there is response data
--- @return nil on error
 function HttpRequest:send(callback)
-	local ip, port = string.match(self.host, "(%d+%.%d+%.%d+%.%d+):?(%d*)")
-
-	if not ip then
+	if not self.host then
 		--TODO: improve error handling
 		return nil
 	end
 
-	if port then
-		tcp_connection.send(ip, port, self:to_string(), callback)
-	else
-		tcp_connection.send(ip, 80, self:to_string(), callback)
-	end
+	tcp_connection.send(self.host, self.port, self:to_string(), callback)
 end
 
 return HttpRequest
