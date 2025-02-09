@@ -18,8 +18,8 @@ function HttpRequest:new()
 	HttpRequest.__index = HttpRequest
 	setmetatable(obj, HttpRequest)
 
-	obj._method = ""
-	obj._uri = ""
+	obj.method = ""
+	obj.uri = ""
 	obj.host = ""
 	obj.port = "80"
 	obj.headers = {}
