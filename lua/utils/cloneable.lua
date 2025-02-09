@@ -11,7 +11,7 @@ local function is_clonable(obj)
 
 	local mt = getmetatable(obj)
 
-	if mt and type(mt.__index == "table") then
+	if mt and type(mt.__index) == "table" then
 		return is_clonable(mt)
 	end
 end
