@@ -1,70 +1,206 @@
 # http-client.nvim
-This is a basic http-client library for Neovim. It uses the internal bindings to libuv for network communication.
-There is only basic and incomplete HTTP/1.1 support at the moment.
 
-## Cloneable trait
-This library implements a cloneable trait so that objects which inherits them are able to be deep copied. Every field of the inheriting object must be either cloenable by itself, a string or a primitive. Since strings areimmutable in LUA by design we don't need to copy them.
-Example:
+## Overview
+The `http` module provides a simple interface for making HTTP requests in Lua, specifically for use with Neovim. It relies on Neovim's libuv bindings and is not intended for standalone Lua environments. It allows users to send GET, POST, PUT, DELETE, and other HTTP requests using a straightforward API. Currently, it only has basic and incomplete HTTP/1.1 support.
+
+## Installation
+
+### Lazy
 ```lua
-local Cloneable = require("utils.cloneable")
+require('lazy').setup({
+  { 'sfenzke/http-client.nvim' }
+})
+```
+## High-Level API Reference
 
-local Example = {}
+### `http.get(host, uri, port, callback)`
+Sends a **GET** request to the specified host and URI.
 
-function Example:new()
-    local obj = {}
+#### Parameters:
+- `host` (string): The server host (e.g., `'localhost'`).
+- `uri` (string): The endpoint to request (e.g., `'/path/to/resource'`).
+- `port` (string, optional): The port number (default: `'80'`).
+- `callback` (function): A function that receives an error (if any) and the response.
 
-    setmetatable(Example, Cloneable, { __index = Cloneable })
-    Example.__index = Example
-    setmetatable(obj, Example)
-
-    example_primitive = true
-    example_string = "example"
-    obj.example_table = {}
-    setmetatable(obj.example_table, { __index = Cloneable })
-end
+#### Example:
+```lua
+http.get('localhost', '/api/data', '80', function(err, response)
+  if err then
+    print("Error:", err)
+    return
+  end
+  print(response.status_code)
+  print(response.body)
+end)
 ```
 
-The example above would be cloneable since itself inherits the Cloneable trait and all it's field are primitives, string or cloneable by themself.
+---
 
-## Creating a new http request
+### `http.post(host, uri, port, body, is_json, callback)`
+Sends a **POST** request to the specified host and URI.
 
-A HTTP-Request can be constructed usig the http.request.builder module.
-It implents the builder pattern so th contruction methods can be chained.
+#### Parameters:
+- `host` (string): The server host.
+- `uri` (string): The endpoint to request.
+- `port` (string, optional): The port number (default: `'80'`).
+- `body` (table|string, optional): The request payload.
+- `is_json` (boolean, optional): If `true`, the request body is sent as JSON (default: `false`).
+- `callback` (function): A function that receives an error (if any) and the response.
 
-The Builder implements the Cloneable trait which makes it possible to prepare a template request, clone it finish it's configuration and the build a new HttpRequest out of it.
+#### Example:
+```lua
+http.post('localhost', '/api/post', '80', { key = 'value' }, true, function(err, response)
+  if err then
+    print("Error:", err)
+    return
+  end
+  print(response.status_code)
+  print(response.body)
+end)
+```
 
-### Builder Methods
-- method
-    Sets the HTTP Method. Can be on of the value provided in the *http.http_methods* module.
+---
 
-- uri
-Sets th uri to request from the server.
+### `http.put(host, uri, port, body, is_json, callback)`
+Sends a **PUT** request to update data.
 
-- host
-Sets the host to send the request to. **must** be provided in IP at the moment since there is no DNS-resolution implemented yet.
-A port can be added optionally separated from the ip by a ":"
-Example: `127.0.0.1:8080`
+#### Parameters:
+Same as `http.post`.
 
-- add_header
-Adds a new header to the table of headers. Refer to RFC 2616 for valid headers.
-    - arguments:
-        - key: the key of the header.
-        - value: value of the header.
+#### Example:
+```lua
+http.put('localhost', '/api/update', '80', { name = 'New Name' }, true, function(err, response)
+  if err then
+    print("Error:", err)
+    return
+  end
+  print(response.status_code)
+  print(response.body)
+end)
+```
 
-- body
-Sets the body of the request. Also sets the Cotent-Size header to the size of the body.
+---
 
-- body_json
-Accepts a table, encodes it into json and sets it as the body of the request. Also sets the Cotent-Size header to the size of the body and the Content-Type header to application/json.
+### `http.delete(host, uri, port, body, is_json, callback)`
+Sends a **DELETE** request.
 
-- build
-Returns the HttpRequest instance which got configured by the builder.
+#### Parameters:
+Same as `http.post`, though `body` is optional.
 
-### HttpRequest methods
-- send
-Sends the request to the host configured.
- - arguments: 
-    - callback: *optional* a function which gets called whenever there is response data fort this request available. It gets passed one argument which contains either a chunk of the the response or nil if the response reached EOF
+#### Example:
+```lua
+http.delete('localhost', '/api/delete', '80', nil, false, function(err, response)
+  if err then
+    print("Error:", err)
+    return
+  end
+  print(response.status_code)
+end)
+```
 
-## Response Parsing
-**Not yet implemented**
+---
+
+### `http.head(host, uri, port, callback)`
+Sends a **HEAD** request to retrieve headers.
+
+#### Example:
+```lua
+http.head('localhost', '/api/info', '80', function(err, response)
+  if err then
+    print("Error:", err)
+    return
+  end
+  print(response.headers)
+end)
+```
+
+---
+
+### `http.options(host, uri, port, callback)`
+Sends an **OPTIONS** request to determine supported HTTP methods.
+
+#### Example:
+```lua
+http.options('localhost', '/api/info', '80', function(err, response)
+  if err then
+    print("Error:", err)
+    return
+  end
+  print(response.headers)
+end)
+```
+
+---
+
+### `http.trace(host, uri, port, callback)`
+Sends a **TRACE** request for debugging.
+
+#### Example:
+```lua
+http.trace('localhost', '/api/trace', '80', function(err, response)
+  if err then
+    print("Error:", err)
+    return
+  end
+  print(response.body)
+end)
+```
+
+---
+
+### `http.connect(host, uri, port, callback)`
+Sends a **CONNECT** request.
+
+#### Example:
+```lua
+http.connect('localhost', '/api/connect', '80', function(err, response)
+  if err then
+    print("Error:", err)
+    return
+  end
+  print(response.body)
+end)
+```
+
+## Low-Level API Reference
+
+### `HttpRequest`
+Represents an HTTP request.
+
+#### Methods:
+- `HttpRequest:new()`: Creates a new request instance.
+- `HttpRequest:to_string()`: Converts the request to a string format.
+- `HttpRequest:send(callback)`: Sends the request asynchronously.
+
+### `HttpResponse`
+Represents an HTTP response.
+
+#### Methods:
+- `HttpResponse:new()`: Creates a new response instance.
+- `HttpResponse:parse(response)`: Parses a raw HTTP response string.
+- `HttpResponse:to_string()`: Converts the response to a string format.
+
+### `HttpRequestBuilder`
+Used to construct HTTP requests in a structured manner.
+
+#### Methods:
+- `HttpRequestBuilder:new()`: Creates a new builder instance.
+- `HttpRequestBuilder:method(method)`: Sets the HTTP method.
+- `HttpRequestBuilder:uri(uri)`: Sets the request URI.
+- `HttpRequestBuilder:host(host)`: Sets the request host.
+- `HttpRequestBuilder:port(port)`: Sets the request port.
+- `HttpRequestBuilder:add_header(key, value)`: Adds an HTTP header.
+- `HttpRequestBuilder:body(body)`: Sets the request body.
+- `HttpRequestBuilder:json_body(obj)`: Sets the request body as JSON.
+- `HttpRequestBuilder:build()`: Constructs the final HTTP request.
+
+The `HttpRequestBuilder` implements the Cloneable trait, allowing users to prepare a template request, clone it, finalize its configuration, and then build a new `HttpRequest` from it.
+
+## Response Object
+The callback function receives an **error** (if any) and a **response object**.
+
+## License
+This project is licensed under the MIT License.
+
+## Contributing
+Feel free to submit issues or contribute improvements!
