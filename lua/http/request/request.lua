@@ -57,7 +57,7 @@ end
 
 function HttpRequest:send(callback)
 	if not self.host then
-		--TODO: improve error handling
+		callback("host maz not be empty", nil)
 		return nil
 	end
 
