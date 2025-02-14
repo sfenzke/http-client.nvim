@@ -1,0 +1,6 @@
+project = "http-client.nvim"
+title = "http-client.nvim Documentation"
+description = "A non-blocking http-client for use in neovim"
+file = "lua"
+readme = "README.md"
+format = "markdown"

@@ -1,16 +1,18 @@
+--- **Low-Level API** Defines an HTTP request.
+-- @classmod http.request.HttpRequest
+-- @field method string Method this request uses (e.g., "GET", "POST").
+-- @field uri string URI to request.
+-- @field host string Host to request from.
+-- @field port string Port number (default "80").
+-- @field headers table<string, string> List of key-value pairs representing the HTTP headers. See RFC 2616 for a description of valid HTTP/1.1 headers.
+-- @field body string Body of the request.
+local HttpRequest = {}
+
 local tcp_connection = require("net.tcp_connection")
 local cloneable = require("utils.cloneable")
 
---- Defines a http request
--- @field method method this request uses
--- @field uri uri to request
--- @field host host to request from
--- @field headers list of key-value pairs representing th http headers see RFC 2616 for a description of valid HTTP/1.1 headers
--- @field body body of the request
-local HttpRequest = {}
-
---- Creates a new instance of HttpRequest
--- @return new HttpRequest instance
+--- Creates a new instance of HttpRequest.
+-- @return HttpRequest A new HttpRequest instance.
 function HttpRequest:new()
 	local obj = {}
 
@@ -28,10 +30,17 @@ function HttpRequest:new()
 	return obj
 end
 
+--- Builds the request line.
+-- @param method string The HTTP method.
+-- @param uri string The request URI.
+-- @return string The formatted request line.
 local function build_request_line(method, uri)
 	return string.format("%s %s HTTP/1.1", method, uri)
 end
 
+--- Builds the HTTP headers.
+-- @param headers table<string, string> The headers to format.
+-- @return string The formatted headers as a string.
 local function build_headers(headers)
 	local t = {}
 	for key, value in pairs(headers) do
@@ -45,6 +54,8 @@ local function build_headers(headers)
 	return table.concat(t, "\r\n")
 end
 
+--- Converts the HttpRequest to a string representation.
+-- @return string The full HTTP request as a string.
 function HttpRequest:to_string()
 	return string.format(
 		"%s\r\nHost: %s\r\n%s\r\n\r\n%s",
@@ -55,9 +66,12 @@ function HttpRequest:to_string()
 	)
 end
 
+--- Sends the HTTP request.
+-- @param callback function A function to handle the response. It receives (err: string|nil, response: string|nil).
+-- @return nil
 function HttpRequest:send(callback)
 	if not self.host then
-		callback("host maz not be empty", nil)
+		callback("host may not be empty", nil)
 		return nil
 	end
 
