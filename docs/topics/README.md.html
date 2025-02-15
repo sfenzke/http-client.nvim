@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>http-client.nvim Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>http-client.nvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Overview">Overview </a></li>
+<li><a href="#Installation">Installation </a></li>
+<li><a href="#High_Level_API_Reference">High-Level API Reference </a></li>
+<li><a href="#Low_Level_API_Reference">Low-Level API Reference </a></li>
+<li><a href="#Response_Object">Response Object </a></li>
+<li><a href="#License">License </a></li>
+<li><a href="#Contributing">Contributing </a></li>
+</ul>
+
+
+<h2>Topics</h2>
+<ul class="">
+  <li><strong>README</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/http_methods.html">http_methods</a></li>
+  <li><a href="../modules/http.html">http</a></li>
+  <li><a href="../modules/tcp_connection.html">tcp_connection</a></li>
+  <li><a href="../modules/Cloneable.html">Cloneable</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/request.builder.HttpRequestBuilder.html">request.builder.HttpRequestBuilder</a></li>
+  <li><a href="../classes/http.request.HttpRequest.html">http.request.HttpRequest</a></li>
+  <li><a href="../classes/http.HttpResponse.html">http.HttpResponse</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+
+<h1>http-client.nvim</h1>
+
+<p><a name="Overview"></a></p>
+<h2>Overview</h2>
+<p>The <a href="../modules/http.html#">http</a> module provides a simple interface for making HTTP requests in Lua, specifically for use with Neovim. It relies on Neovim's libuv bindings and is not intended for standalone Lua environments. It allows users to send GET, POST, PUT, DELETE, and other HTTP requests using a straightforward API. Currently, it only has basic and incomplete HTTP/1.1 support.</p>
+
+<p><a name="Installation"></a></p>
+<h2>Installation</h2>
+
+<h3>Lazy</h3>
+
+<pre>
+<span class="global">require</span>(<span class="string">'lazy'</span>).<span class="function-name">setup</span>({
+  { <span class="string">'sfenzke/http-client.nvim'</span> }
+})
+</pre>
+
+<p><a name="High_Level_API_Reference"></a></p>
+<h2>High-Level API Reference</h2>
+
+<h3><code>http.get(host, uri, port, callback)</code></h3>
+<p>Sends a <strong>GET</strong> request to the specified host and URI.</p>
+
+<h4>Parameters:</h4>
+<p>- <code>host</code> (string): The server host (e.g., <code>&apos;localhost&apos;</code>).
+- <code>uri</code> (string): The endpoint to request (e.g., <code>&apos;/path/to/resource&apos;</code>).
+- <code>port</code> (string, optional): The port number (default: <code>&apos;80&apos;</code>).
+- <code>callback</code> (function): A function that receives an error (if any) and the response.</p>
+
+<h4>Example:</h4>
+
+<pre>
+http.<span class="function-name">get</span>(<span class="string">'localhost'</span>, <span class="string">'/api/data'</span>, <span class="string">'80'</span>, <span class="keyword">function</span>(err, response)
+  <span class="keyword">if</span> err <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">"Error:"</span>, err)
+    <span class="keyword">return</span>
+  <span class="keyword">end</span>
+  <span class="global">print</span>(response.status_code)
+  <span class="global">print</span>(response.body)
+<span class="keyword">end</span>)
+</pre>
+
+
+<hr/>
+
+<h3><code>http.post(host, uri, port, body, is_json, callback)</code></h3>
+<p>Sends a <strong>POST</strong> request to the specified host and URI.</p>
+
+<h4>Parameters:</h4>
+<p>- <code>host</code> (string): The server host.
+- <code>uri</code> (string): The endpoint to request.
+- <code>port</code> (string, optional): The port number (default: <code>&apos;80&apos;</code>).
+- <code>body</code> (table|string, optional): The request payload.
+- <code>is_json</code> (boolean, optional): If <code>true</code>, the request body is sent as JSON (default: <code>false</code>).
+- <code>callback</code> (function): A function that receives an error (if any) and the response.</p>
+
+<h4>Example:</h4>
+
+<pre>
+http.<span class="function-name">post</span>(<span class="string">'localhost'</span>, <span class="string">'/api/post'</span>, <span class="string">'80'</span>, { key = <span class="string">'value'</span> }, <span class="keyword">true</span>, <span class="keyword">function</span>(err, response)
+  <span class="keyword">if</span> err <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">"Error:"</span>, err)
+    <span class="keyword">return</span>
+  <span class="keyword">end</span>
+  <span class="global">print</span>(response.status_code)
+  <span class="global">print</span>(response.body)
+<span class="keyword">end</span>)
+</pre>
+
+
+<hr/>
+
+<h3><code>http.put(host, uri, port, body, is_json, callback)</code></h3>
+<p>Sends a <strong>PUT</strong> request to update data.</p>
+
+<h4>Parameters:</h4>
+<p>Same as <a href="../modules/http.html#post">http.post</a>.</p>
+
+<h4>Example:</h4>
+
+<pre>
+http.<span class="function-name">put</span>(<span class="string">'localhost'</span>, <span class="string">'/api/update'</span>, <span class="string">'80'</span>, { name = <span class="string">'New Name'</span> }, <span class="keyword">true</span>, <span class="keyword">function</span>(err, response)
+  <span class="keyword">if</span> err <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">"Error:"</span>, err)
+    <span class="keyword">return</span>
+  <span class="keyword">end</span>
+  <span class="global">print</span>(response.status_code)
+  <span class="global">print</span>(response.body)
+<span class="keyword">end</span>)
+</pre>
+
+
+<hr/>
+
+<h3><code>http.delete(host, uri, port, body, is_json, callback)</code></h3>
+<p>Sends a <strong>DELETE</strong> request.</p>
+
+<h4>Parameters:</h4>
+<p>Same as <a href="../modules/http.html#post">http.post</a>, though <code>body</code> is optional.</p>
+
+<h4>Example:</h4>
+
+<pre>
+http.<span class="function-name">delete</span>(<span class="string">'localhost'</span>, <span class="string">'/api/delete'</span>, <span class="string">'80'</span>, <span class="keyword">nil</span>, <span class="keyword">false</span>, <span class="keyword">function</span>(err, response)
+  <span class="keyword">if</span> err <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">"Error:"</span>, err)
+    <span class="keyword">return</span>
+  <span class="keyword">end</span>
+  <span class="global">print</span>(response.status_code)
+<span class="keyword">end</span>)
+</pre>
+
+
+<hr/>
+
+<h3><code>http.head(host, uri, port, callback)</code></h3>
+<p>Sends a <strong>HEAD</strong> request to retrieve headers.</p>
+
+<h4>Example:</h4>
+
+<pre>
+http.<span class="function-name">head</span>(<span class="string">'localhost'</span>, <span class="string">'/api/info'</span>, <span class="string">'80'</span>, <span class="keyword">function</span>(err, response)
+  <span class="keyword">if</span> err <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">"Error:"</span>, err)
+    <span class="keyword">return</span>
+  <span class="keyword">end</span>
+  <span class="global">print</span>(response.headers)
+<span class="keyword">end</span>)
+</pre>
+
+
+<hr/>
+
+<h3><code>http.options(host, uri, port, callback)</code></h3>
+<p>Sends an <strong>OPTIONS</strong> request to determine supported HTTP methods.</p>
+
+<h4>Example:</h4>
+
+<pre>
+http.<span class="function-name">options</span>(<span class="string">'localhost'</span>, <span class="string">'/api/info'</span>, <span class="string">'80'</span>, <span class="keyword">function</span>(err, response)
+  <span class="keyword">if</span> err <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">"Error:"</span>, err)
+    <span class="keyword">return</span>
+  <span class="keyword">end</span>
+  <span class="global">print</span>(response.headers)
+<span class="keyword">end</span>)
+</pre>
+
+
+<hr/>
+
+<h3><code>http.trace(host, uri, port, callback)</code></h3>
+<p>Sends a <strong>TRACE</strong> request for debugging.</p>
+
+<h4>Example:</h4>
+
+<pre>
+http.<span class="function-name">trace</span>(<span class="string">'localhost'</span>, <span class="string">'/api/trace'</span>, <span class="string">'80'</span>, <span class="keyword">function</span>(err, response)
+  <span class="keyword">if</span> err <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">"Error:"</span>, err)
+    <span class="keyword">return</span>
+  <span class="keyword">end</span>
+  <span class="global">print</span>(response.body)
+<span class="keyword">end</span>)
+</pre>
+
+
+<hr/>
+
+<h3><code>http.connect(host, uri, port, callback)</code></h3>
+<p>Sends a <strong>CONNECT</strong> request.</p>
+
+<h4>Example:</h4>
+
+<pre>
+http.<span class="function-name">connect</span>(<span class="string">'localhost'</span>, <span class="string">'/api/connect'</span>, <span class="string">'80'</span>, <span class="keyword">function</span>(err, response)
+  <span class="keyword">if</span> err <span class="keyword">then</span>
+    <span class="global">print</span>(<span class="string">"Error:"</span>, err)
+    <span class="keyword">return</span>
+  <span class="keyword">end</span>
+  <span class="global">print</span>(response.body)
+<span class="keyword">end</span>)
+</pre>
+
+
+<p><a name="Low_Level_API_Reference"></a></p>
+<h2>Low-Level API Reference</h2>
+
+<h3><code>HttpRequest</code></h3>
+<p>Represents an HTTP request.</p>
+
+<h4>Methods:</h4>
+<p>- <code>HttpRequest:new()</code>: Creates a new request instance.
+- <code>HttpRequest:to_string()</code>: Converts the request to a string format.
+- <code>HttpRequest:send(callback)</code>: Sends the request asynchronously.</p>
+
+<h3><code>HttpResponse</code></h3>
+<p>Represents an HTTP response.</p>
+
+<h4>Methods:</h4>
+<p>- <code>HttpResponse:new()</code>: Creates a new response instance.
+- <code>HttpResponse:parse(response)</code>: Parses a raw HTTP response string.
+- <code>HttpResponse:to_string()</code>: Converts the response to a string format.</p>
+
+<h3><code>HttpRequestBuilder</code></h3>
+<p>Used to construct HTTP requests in a structured manner.</p>
+
+<h4>Methods:</h4>
+<p>- <code>HttpRequestBuilder:new()</code>: Creates a new builder instance.
+- <code>HttpRequestBuilder:method(method)</code>: Sets the HTTP method.
+- <code>HttpRequestBuilder:uri(uri)</code>: Sets the request URI.
+- <code>HttpRequestBuilder:host(host)</code>: Sets the request host.
+- <code>HttpRequestBuilder:port(port)</code>: Sets the request port.
+- <code>HttpRequestBuilder:add_header(key, value)</code>: Adds an HTTP header.
+- <code>HttpRequestBuilder:body(body)</code>: Sets the request body.
+- <code>HttpRequestBuilder:json_body(obj)</code>: Sets the request body as JSON.
+- <code>HttpRequestBuilder:build()</code>: Constructs the final HTTP request.</p>
+
+<p>The <code>HttpRequestBuilder</code> implements the Cloneable trait, allowing users to prepare a template request, clone it, finalize its configuration, and then build a new <code>HttpRequest</code> from it.</p>
+
+<p><a name="Response_Object"></a></p>
+<h2>Response Object</h2>
+<p>The callback function receives an <strong>error</strong> (if any) and a <strong>response object</strong>.</p>
+
+<p><a name="License"></a></p>
+<h2>License</h2>
+<p>This project is licensed under the MIT License.</p>
+
+<p><a name="Contributing"></a></p>
+<h2>Contributing</h2>
+<p>Feel free to submit issues or contribute improvements!</p>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-02-15 02:14:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

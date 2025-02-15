@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>http-client.nvim Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>http-client.nvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>request.builder.HttpRequestBuilder</strong></li>
+  <li><a href="../classes/http.request.HttpRequest.html">http.request.HttpRequest</a></li>
+  <li><a href="../classes/http.HttpResponse.html">http.HttpResponse</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/http_methods.html">http_methods</a></li>
+  <li><a href="../modules/http.html">http</a></li>
+  <li><a href="../modules/tcp_connection.html">tcp_connection</a></li>
+  <li><a href="../modules/Cloneable.html">Cloneable</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>request.builder.HttpRequestBuilder</code></h1>
+<p><strong>Low-Level API</strong> Builder for a HTTP-Request object.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:new">request.builder.httprequestbuilder:new ()</a></td>
+	<td class="summary">Creates a new instance of HttpRequestBuilder.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:method">request.builder.httprequestbuilder:method (method)</a></td>
+	<td class="summary">Sets the HTTP method.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:uri">request.builder.httprequestbuilder:uri (uri)</a></td>
+	<td class="summary">Sets the request URI.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:host">request.builder.httprequestbuilder:host (host)</a></td>
+	<td class="summary">Sets the request host.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:port">request.builder.httprequestbuilder:port (port)</a></td>
+	<td class="summary">Sets the request port.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:add_header">request.builder.httprequestbuilder:add_header (key, value)</a></td>
+	<td class="summary">Adds a header to the request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:body">request.builder.httprequestbuilder:body (body)</a></td>
+	<td class="summary">Sets the request body.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:json_body">request.builder.httprequestbuilder:json_body (obj)</a></td>
+	<td class="summary">Encodes an object as JSON and sets it as the request body.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#request.builder.httprequestbuilder:build">request.builder.httprequestbuilder:build ()</a></td>
+	<td class="summary">Builds and returns the HTTP request.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "request.builder.httprequestbuilder:new"></a>
+    <strong>request.builder.httprequestbuilder:new ()</strong>
+    </dt>
+    <dd>
+    Creates a new instance of HttpRequestBuilder.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequestBuilder A new HttpRequestBuilder instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request.builder.httprequestbuilder:method"></a>
+    <strong>request.builder.httprequestbuilder:method (method)</strong>
+    </dt>
+    <dd>
+    Sets the HTTP method.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">method</span>
+         string The HTTP method (e.g., "GET", "POST").
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequestBuilder|nil The builder instance on success, or nil on failure.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request.builder.httprequestbuilder:uri"></a>
+    <strong>request.builder.httprequestbuilder:uri (uri)</strong>
+    </dt>
+    <dd>
+    Sets the request URI.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">uri</span>
+         string The request URI.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequestBuilder The builder instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request.builder.httprequestbuilder:host"></a>
+    <strong>request.builder.httprequestbuilder:host (host)</strong>
+    </dt>
+    <dd>
+    Sets the request host.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         string The request host.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequestBuilder The builder instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request.builder.httprequestbuilder:port"></a>
+    <strong>request.builder.httprequestbuilder:port (port)</strong>
+    </dt>
+    <dd>
+    Sets the request port.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">port</span>
+         string The request port.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequestBuilder The builder instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request.builder.httprequestbuilder:add_header"></a>
+    <strong>request.builder.httprequestbuilder:add_header (key, value)</strong>
+    </dt>
+    <dd>
+    Adds a header to the request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+         string The header name.
+        </li>
+        <li><span class="parameter">value</span>
+         string The header value.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequestBuilder The builder instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request.builder.httprequestbuilder:body"></a>
+    <strong>request.builder.httprequestbuilder:body (body)</strong>
+    </dt>
+    <dd>
+    Sets the request body.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">body</span>
+         string The request body.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequestBuilder The builder instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request.builder.httprequestbuilder:json_body"></a>
+    <strong>request.builder.httprequestbuilder:json_body (obj)</strong>
+    </dt>
+    <dd>
+    Encodes an object as JSON and sets it as the request body.
+ Also adds the HTTP header "Content-Type": "application/json".
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">obj</span>
+         table The object to encode.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequestBuilder The builder instance.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "request.builder.httprequestbuilder:build"></a>
+    <strong>request.builder.httprequestbuilder:build ()</strong>
+    </dt>
+    <dd>
+    Builds and returns the HTTP request.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpRequest The built HTTP request.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-02-15 02:14:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

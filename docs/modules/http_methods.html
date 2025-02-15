@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>http-client.nvim Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>http-client.nvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>http_methods</strong></li>
+  <li><a href="../modules/http.html">http</a></li>
+  <li><a href="../modules/tcp_connection.html">tcp_connection</a></li>
+  <li><a href="../modules/Cloneable.html">Cloneable</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/request.builder.HttpRequestBuilder.html">request.builder.HttpRequestBuilder</a></li>
+  <li><a href="../classes/http.request.HttpRequest.html">http.request.HttpRequest</a></li>
+  <li><a href="../classes/http.HttpResponse.html">http.HttpResponse</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>http_methods</code></h1>
+<p><strong>Low-Level API</strong> HTTP Methods Module
+ Provides a table of standard HTTP methods.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#OPTIONS">OPTIONS</a></td>
+	<td class="summary">HTTP OPTIONS method.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GET">GET</a></td>
+	<td class="summary">HTTP GET method.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HEAD">HEAD</a></td>
+	<td class="summary">HTTP HEAD method.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#POST">POST</a></td>
+	<td class="summary">HTTP POST method.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PUT">PUT</a></td>
+	<td class="summary">HTTP PUT method.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DELETE">DELETE</a></td>
+	<td class="summary">HTTP DELETE method.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TRACE">TRACE</a></td>
+	<td class="summary">HTTP TRACE method.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CONNECT">CONNECT</a></td>
+	<td class="summary">HTTP CONNECT method.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "OPTIONS"></a>
+    <strong>OPTIONS</strong>
+    </dt>
+    <dd>
+    HTTP OPTIONS method.
+ Used to describe communication options for the target resource.
+
+
+    <ul>
+        <li><span class="parameter">OPTIONS</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GET"></a>
+    <strong>GET</strong>
+    </dt>
+    <dd>
+    HTTP GET method.
+ Used to request a representation of the specified resource.
+
+
+    <ul>
+        <li><span class="parameter">GET</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "HEAD"></a>
+    <strong>HEAD</strong>
+    </dt>
+    <dd>
+    HTTP HEAD method.
+ Similar to GET but only retrieves headers.
+
+
+    <ul>
+        <li><span class="parameter">HEAD</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "POST"></a>
+    <strong>POST</strong>
+    </dt>
+    <dd>
+    HTTP POST method.
+ Used to submit data to be processed to a specified resource.
+
+
+    <ul>
+        <li><span class="parameter">POST</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PUT"></a>
+    <strong>PUT</strong>
+    </dt>
+    <dd>
+    HTTP PUT method.
+ Used to update or create a resource.
+
+
+    <ul>
+        <li><span class="parameter">PUT</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DELETE"></a>
+    <strong>DELETE</strong>
+    </dt>
+    <dd>
+    HTTP DELETE method.
+ Used to delete the specified resource.
+
+
+    <ul>
+        <li><span class="parameter">DELETE</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TRACE"></a>
+    <strong>TRACE</strong>
+    </dt>
+    <dd>
+    HTTP TRACE method.
+ Used to perform a message loop-back test.
+
+
+    <ul>
+        <li><span class="parameter">TRACE</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CONNECT"></a>
+    <strong>CONNECT</strong>
+    </dt>
+    <dd>
+    HTTP CONNECT method.
+ Used to establish a tunnel to the server.
+
+
+    <ul>
+        <li><span class="parameter">CONNECT</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-02-15 02:14:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

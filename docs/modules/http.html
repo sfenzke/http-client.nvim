@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>http-client.nvim Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>http-client.nvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/http_methods.html">http_methods</a></li>
+  <li><strong>http</strong></li>
+  <li><a href="../modules/tcp_connection.html">tcp_connection</a></li>
+  <li><a href="../modules/Cloneable.html">Cloneable</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/request.builder.HttpRequestBuilder.html">request.builder.HttpRequestBuilder</a></li>
+  <li><a href="../classes/http.request.HttpRequest.html">http.request.HttpRequest</a></li>
+  <li><a href="../classes/http.HttpResponse.html">http.HttpResponse</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>http</code></h1>
+<p><strong>High-Lvel API</strong> HTTP Client Module
+ Provides functions to make HTTP requests using various methods.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#get">get (host, uri, port, callback)</a></td>
+	<td class="summary">Sends a GET request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#post">post (host, uri, port, body, is_json, callback)</a></td>
+	<td class="summary">Sends a POST request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#put">put (host, uri, port, body, is_json, callback)</a></td>
+	<td class="summary">Sends a PUT request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#delete">delete (host, uri, port, body, is_json, callback)</a></td>
+	<td class="summary">Sends a DELETE request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#head">head (host, uri, port, callback)</a></td>
+	<td class="summary">Sends a HEAD request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#options">options (host, uri, port, callback)</a></td>
+	<td class="summary">Sends an OPTIONS request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#trace">trace (host, uri, port, callback)</a></td>
+	<td class="summary">Sends a TRACE request.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#connect">connect (host, uri, port, callback)</a></td>
+	<td class="summary">Sends a CONNECT request.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "get"></a>
+    <strong>get (host, uri, port, callback)</strong>
+    </dt>
+    <dd>
+    Sends a GET request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         The target host.
+        </li>
+        <li><span class="parameter">uri</span>
+         The request URI.
+        </li>
+        <li><span class="parameter">port</span>
+         The target port (defaults to 80).
+        </li>
+        <li><span class="parameter">callback</span>
+         Function to handle the response.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "post"></a>
+    <strong>post (host, uri, port, body, is_json, callback)</strong>
+    </dt>
+    <dd>
+    Sends a POST request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         The target host.
+        </li>
+        <li><span class="parameter">uri</span>
+         The request URI.
+        </li>
+        <li><span class="parameter">port</span>
+         The target port (defaults to 80).
+        </li>
+        <li><span class="parameter">body</span>
+         The request body.
+        </li>
+        <li><span class="parameter">is_json</span>
+         Whether the body should be sent as JSON (default: false).
+        </li>
+        <li><span class="parameter">callback</span>
+         Function to handle the response.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "put"></a>
+    <strong>put (host, uri, port, body, is_json, callback)</strong>
+    </dt>
+    <dd>
+    Sends a PUT request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         The target host.
+        </li>
+        <li><span class="parameter">uri</span>
+         The request URI.
+        </li>
+        <li><span class="parameter">port</span>
+         The target port (defaults to 80).
+        </li>
+        <li><span class="parameter">body</span>
+         The request body.
+        </li>
+        <li><span class="parameter">is_json</span>
+         Whether the body should be sent as JSON (default: false).
+        </li>
+        <li><span class="parameter">callback</span>
+         Function to handle the response.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "delete"></a>
+    <strong>delete (host, uri, port, body, is_json, callback)</strong>
+    </dt>
+    <dd>
+    Sends a DELETE request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         The target host.
+        </li>
+        <li><span class="parameter">uri</span>
+         The request URI.
+        </li>
+        <li><span class="parameter">port</span>
+         The target port (defaults to 80).
+        </li>
+        <li><span class="parameter">body</span>
+         The request body (optional).
+        </li>
+        <li><span class="parameter">is_json</span>
+         Whether the body should be sent as JSON (default: false).
+        </li>
+        <li><span class="parameter">callback</span>
+         Function to handle the response.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "head"></a>
+    <strong>head (host, uri, port, callback)</strong>
+    </dt>
+    <dd>
+    Sends a HEAD request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         The target host.
+        </li>
+        <li><span class="parameter">uri</span>
+         The request URI.
+        </li>
+        <li><span class="parameter">port</span>
+         The target port (defaults to 80).
+        </li>
+        <li><span class="parameter">callback</span>
+         Function to handle the response.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "options"></a>
+    <strong>options (host, uri, port, callback)</strong>
+    </dt>
+    <dd>
+    Sends an OPTIONS request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         The target host.
+        </li>
+        <li><span class="parameter">uri</span>
+         The request URI.
+        </li>
+        <li><span class="parameter">port</span>
+         The target port (defaults to 80).
+        </li>
+        <li><span class="parameter">callback</span>
+         Function to handle the response.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "trace"></a>
+    <strong>trace (host, uri, port, callback)</strong>
+    </dt>
+    <dd>
+    Sends a TRACE request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         The target host.
+        </li>
+        <li><span class="parameter">uri</span>
+         The request URI.
+        </li>
+        <li><span class="parameter">port</span>
+         The target port (defaults to 80).
+        </li>
+        <li><span class="parameter">callback</span>
+         Function to handle the response.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "connect"></a>
+    <strong>connect (host, uri, port, callback)</strong>
+    </dt>
+    <dd>
+    Sends a CONNECT request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+         The target host.
+        </li>
+        <li><span class="parameter">uri</span>
+         The request URI.
+        </li>
+        <li><span class="parameter">port</span>
+         The target port (defaults to 80).
+        </li>
+        <li><span class="parameter">callback</span>
+         Function to handle the response.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-02-15 02:14:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

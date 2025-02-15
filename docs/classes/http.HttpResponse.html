@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>http-client.nvim Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>http-client.nvim</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Tables">Tables</a></li>
+<li><a href="#Fields">Fields</a></li>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/request.builder.HttpRequestBuilder.html">request.builder.HttpRequestBuilder</a></li>
+  <li><a href="../classes/http.request.HttpRequest.html">http.request.HttpRequest</a></li>
+  <li><strong>http.HttpResponse</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/http_methods.html">http_methods</a></li>
+  <li><a href="../modules/http.html">http</a></li>
+  <li><a href="../modules/tcp_connection.html">tcp_connection</a></li>
+  <li><a href="../modules/Cloneable.html">Cloneable</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>http.HttpResponse</code></h1>
+<p><strong>Low-Level API</strong> HTTP Response Module
+ Provides functionality to parse and represent HTTP responses.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#obj.headers">obj.headers</a></td>
+	<td class="summary">The response headers as a table.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#obj.protocol">obj.protocol</a></td>
+	<td class="summary">The HTTP protocol version (e.g., HTTP/1.1).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#obj.status_code">obj.status_code</a></td>
+	<td class="summary">The HTTP status code (e.g., 200, 404).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#obj.status_message">obj.status_message</a></td>
+	<td class="summary">The HTTP status message (e.g., OK, Not Found).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#obj.body">obj.body</a></td>
+	<td class="summary">The response body.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#http.httpresponse:new">http.httpresponse:new ()</a></td>
+	<td class="summary">Creates a new HttpResponse object.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#http.httpresponse:parse">http.httpresponse:parse (response)</a></td>
+	<td class="summary">Parses a raw HTTP response string into an HttpResponse object.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#http.httpresponse:to_string">http.httpresponse:to_string ()</a></td>
+	<td class="summary">Converts the HttpResponse object into a string representation.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "obj.headers"></a>
+    <strong>obj.headers</strong>
+    </dt>
+    <dd>
+    The response headers as a table.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">table</span>
+         headers
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "obj.protocol"></a>
+    <strong>obj.protocol</strong>
+    </dt>
+    <dd>
+    The HTTP protocol version (e.g., HTTP/1.1).
+
+
+    <ul>
+        <li><span class="parameter">string</span>
+         protocol
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "obj.status_code"></a>
+    <strong>obj.status_code</strong>
+    </dt>
+    <dd>
+    The HTTP status code (e.g., 200, 404).
+
+
+    <ul>
+        <li><span class="parameter">string</span>
+         status_code
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "obj.status_message"></a>
+    <strong>obj.status_message</strong>
+    </dt>
+    <dd>
+    The HTTP status message (e.g., OK, Not Found).
+
+
+    <ul>
+        <li><span class="parameter">string</span>
+         status_message
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "obj.body"></a>
+    <strong>obj.body</strong>
+    </dt>
+    <dd>
+    The response body.
+
+
+    <ul>
+        <li><span class="parameter">string</span>
+         body
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "http.httpresponse:new"></a>
+    <strong>http.httpresponse:new ()</strong>
+    </dt>
+    <dd>
+    Creates a new HttpResponse object.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        HttpResponse A new instance of HttpResponse.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "http.httpresponse:parse"></a>
+    <strong>http.httpresponse:parse (response)</strong>
+    </dt>
+    <dd>
+    Parses a raw HTTP response string into an HttpResponse object.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">response</span>
+         string The raw HTTP response string.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "http.httpresponse:to_string"></a>
+    <strong>http.httpresponse:to_string ()</strong>
+    </dt>
+    <dd>
+    Converts the HttpResponse object into a string representation.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string A string representation of the HTTP response.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-02-15 02:14:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
